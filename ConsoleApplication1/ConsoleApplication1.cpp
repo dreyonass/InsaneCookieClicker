@@ -1,6 +1,9 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
 #include <iostream>
+#include <Windows.h>
+#include "SFML/System.hpp"
+#include "SFML/Window.hpp"
+#include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 #include <sstream>
 #include <string>
 #include <random>
@@ -15,19 +18,18 @@ int main()
 {   
 	unsigned int width = 800;
 	unsigned int height = 600;
-    // create the window
+
     sf::RenderWindow window(sf::VideoMode({ width, height }), "My window");
-    //sf::Font font("C:\Users\Drey\source\repos\ConsoleApplication1\ConsoleApplication1\x64\Debug\arial.ttf");
-	sf::Font font;
-    LoadFont(font, "Fonts/arial.ttf");
+
+    
+    const sf::Font font("Fonts/arial.ttf");
 
     sf::Text text(font);
-	text.setString("Hello SFML");
+	text.setString("pagaliau blet fontas veik");
     text.setOrigin(text.getGlobalBounds().size / 2.0f);
     text.setPosition({ width / 2.0f, height / 2.0f });
 	text.setFillColor(sf::Color::White);
-	text.setOutlineColor(sf::Color::Red);
-    text.setOutlineThickness(1.0f);
+
     // run the program as long as the window is open
     while (window.isOpen())
     {
