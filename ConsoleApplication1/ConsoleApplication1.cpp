@@ -25,14 +25,38 @@ int main()
     const sf::Font font("Fonts/arial.ttf");
 
     sf::Text text(font);
-	text.setString("pagaliau blet fontas veik");
+	text.setString("grazus sausainis");
     text.setOrigin(text.getGlobalBounds().size / 2.0f);
-    text.setPosition({ width / 2.0f, height / 2.0f });
+    text.setPosition({ width / 2.0f, height / 3.0f });
 	text.setFillColor(sf::Color::White);
+    int kiek = 0;
+    int veik = 0;
+
+    sf::CircleShape sausainis(50.f);
+	sausainis.setFillColor(sf::Color::Yellow);
+	sausainis.setPosition({ width / 2.0f - 50.f, height / 2.0f - 50.f });
+
+    // Track previous mouse button state so we count only on transition
+    bool mouseWasPressed = false;
 
     // run the program as long as the window is open
     while (window.isOpen())
     {
+        // Read current mouse state
+        bool mousePressed = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
+
+        // If currently pressed but was not pressed last frame -> count one click
+        if (mousePressed && !mouseWasPressed)
+        {
+            kiek += 1;
+        }
+
+        // Update previous state for next frame
+        mouseWasPressed = mousePressed;
+
+        sf::Text text2(font);
+        text2.setString("kiekis: " + to_string(kiek));
+
         // check all the window's events that were triggered since the last iteration of the loop
         while (const std::optional event = window.pollEvent())
         {
@@ -47,6 +71,8 @@ int main()
         // draw everything here...
         // window.draw(...);
 		window.draw(text);
+		window.draw(sausainis);
+		window.draw(text2);
         // end the current frame
         window.display();
     }
